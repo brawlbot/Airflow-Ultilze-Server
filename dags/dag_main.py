@@ -26,10 +26,20 @@ with dag:
         dag=dag,
     )
 
-    run_prometheus_task = BashOperator(
+    config_pip_list = BashOperator(
         task_id=f"task_pip_list",
         bash_command=f"pip config list -v",
         dag=dag,
     )
-    install_prometheus_task
+
+    gs2_troubleshoot_conda = BashOperator(
+        task_id=f"task_gs2_troubleshoot_conda",
+        bash_command=f"if [ ! -f environment.tar.gz ]then    conda create -y -n pyspark-airflow python=3.8 sqlalchemy=2.0.21 psycopg2=2.9.3 conda-pack pandas=1.5.2 joblib=1.4.2 pydrive=1.3.1 gspread=6.1.2    source /opt/conda/bin/activate pyspark-airflow    conda pack -o environment.tar.gzfi",
+        dag=dag,
+    )
+    # install_prometheus_task >> gs2_troubleshoot_conda
+
+    config_pip_list >> gs2_troubleshoot_conda
+    config_pip_list >> install_prometheus_task
+
     #install_prometheus_task >> run_prometheus_task
