@@ -43,7 +43,7 @@ with dag:
     check_env_task = BashOperator(
         task_id=f"task_check_env",
         # Updated command to ensure conda is initialized before activation
-        bash_command=f"source /opt/conda/etc/profile.d/conda.sh && conda activate pyspark-airflow && conda env export",
+        bash_command=f"source /opt/conda/etc/profile.d/conda.sh && conda activate pyspark-airflow && conda env export > /tmp/environment.yml && cat /tmp/environment.yml",
         dag=dag,
     )
     
