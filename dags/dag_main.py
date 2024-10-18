@@ -41,7 +41,7 @@ with dag:
 
     check_env_task = BashOperator(
         task_id=f"task_check_env",
-        bash_command=f"conda activate pyspark-airflow && conda env export",
+        bash_command=f"conda init && conda activate pyspark-airflow && conda env export",
         dag=dag,
     )
     # install_prometheus_task >> gs2_troubleshoot_conda
