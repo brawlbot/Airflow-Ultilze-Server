@@ -38,9 +38,15 @@ with dag:
         bash_command=f"conda create -y -n pyspark-airflow python=3.8 sqlalchemy=2.0.21 psycopg2=2.9.3 conda-pack pandas=1.5.2 joblib=1.4.2 pydrive=1.3.1 && source /opt/conda/bin/activate pyspark-airflow && pip3 install gspread==6.1.2 && conda pack -o environment.tar.gz",
         dag=dag,
     )
+
+    check_env_task = BashOperator(
+        task_id=f"task_check_env",
+        bash_command=f"conda activate pyspark-airflow && conda env export",
+        dag=dag,
+    )
     # install_prometheus_task >> gs2_troubleshoot_conda
 
-    config_pip_list >> gs2_troubleshoot_conda
-    config_pip_list >> install_prometheus_task
+    config_pip_list >> gs2_troubleshoot_conda >> check_env_task
+    # config_pip_list >> install_prometheus_task
 
     #install_prometheus_task >> run_prometheus_task
