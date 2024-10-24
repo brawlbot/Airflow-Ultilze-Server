@@ -1,0 +1,9 @@
+{
+    "Connect DB": {
+        "DBUSER": "postgres",
+        "DBPASS": "XXXXXXXXXXXXXXXXXXXXXXXX",
+        "DBHOST": "10.50.44.106",
+        "DBPORT": 30385,
+        "DBNAME": "postgres"
+    }
+}
