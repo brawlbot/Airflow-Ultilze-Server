@@ -12,10 +12,10 @@ def get_sys_path():
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2023, 1, 1),
+    'start_date': datetime(2024, 1, 1),
 }
 
-dag = DAG('foo_dag', default_args=default_args, schedule_interval='@daily')
+dag = DAG('foo_dag', default_args=default_args, schedule_interval='@monthly')
 
 run_foo = PythonOperator(
     task_id='run_foo_task',
