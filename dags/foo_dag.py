@@ -3,6 +3,7 @@ from pprint import pprint
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
+sys.path.append('..')
 from scripts.foo import foo  # Importing the foo function
 
 def get_sys_path():
