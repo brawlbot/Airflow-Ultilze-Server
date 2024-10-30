@@ -44,3 +44,6 @@ run [foo_dag](dags/foo_dag.py) to call [foo](scripts/foo.py) function to print `
 
 ## 2. Run airflow with custom environment variable
 run [proxy_http_env_dag](dags/proxy_http_env_dag.py) to test if Airflow can run with custom environment variable
+
+## 3. Run spark jdbc
+run [pyspark_jdbc_check.ipynb](notebook/pyspark_jdbc_check.ipynb) to test if spark can read from jdbc
