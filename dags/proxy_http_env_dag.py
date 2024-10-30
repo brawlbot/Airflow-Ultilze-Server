@@ -35,5 +35,5 @@ with dag:
             "HTTP_PROXY": "http://proxy.dp.vng.vn:3128",
             "HTTPS_PROXY": "http://proxy.dp.vng.vn:3128",
         },
-        dag=dag,
+        dag=dag
     )
