@@ -1,9 +1,10 @@
-import sys
+import sys, os
 from pprint import pprint
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-sys.path.append('..')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from scripts.foo import foo  # Importing the foo function
 
 def get_sys_path():
@@ -16,11 +17,11 @@ default_args = {
 
 dag = DAG('foo_dag', default_args=default_args, schedule_interval='@daily')
 
-# run_foo = PythonOperator(
-#     task_id='run_foo_task',
-#     python_callable=foo,  # Calling the foo function
-#     dag=dag,
-# )
+run_foo = PythonOperator(
+    task_id='run_foo_task',
+    python_callable=foo,  # Calling the foo function
+    dag=dag,
+)
 
 get_sys_path = PythonOperator(
     task_id='get_sys_path_task',
