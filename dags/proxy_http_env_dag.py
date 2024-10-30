@@ -21,7 +21,7 @@ dag = DAG(
 with dag:
     export_http_proxy = BashOperator(
         task_id="task_export_env_vars",
-        bash_command="export HTTP_PROXY=http://proxy.gs2.vn:8080 && export HTTPS_PROXY=http://proxy.gs2.vn:8080 && curl google.com",
+        bash_command="export HTTP_PROXY=http://proxy.dp.vng.vn:3128 && export HTTPS_PROXY=http://proxy.dp.vng.vn:3128 && curl google.com",
         dag=dag,
     )
 
@@ -30,8 +30,8 @@ with dag:
         task_id="task_env_vars_check",
         bash_command="env | grep HTTP_PROXY",
         env={
-            "HTTP_PROXY": "http://proxy.gs2.vn:8080",
-            "HTTPS_PROXY": "http://proxy.gs2.vn:8080",
+            "HTTP_PROXY": "http://proxy.dp.vng.vn:3128",
+            "HTTPS_PROXY": "http://proxy.dp.vng.vn:3128",
         },
         dag=dag,
     )
