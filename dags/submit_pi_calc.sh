@@ -29,6 +29,9 @@ cd ${AIRFLOW_HOME}
 #     pip install pydrive==1.3.1
 #     conda pack -o environment.tar.gz
 # fi
+# conda unpack -o environment.tar.gz
+
+
 
 # source /home/airflow/.bashrc
 # Spark Related Options
@@ -47,5 +50,6 @@ spark-submit \
 --executor-memory 4g \
 --executor-cores 4 \
 --num-executors 3 \
---archives environment.tar.gz#environment \
-${AIRFLOW_HOME}/dags/pi-spark.py
+${AIRFLOW_HOME}/dags/repo/dags/pi-spark.py
+
+# --archives environment.tar.gz#environment \
