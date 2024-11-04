@@ -36,7 +36,7 @@ with DAG(
 
     step_pi_calc = BashOperator(
         task_id='pi_calc',
-        bash_command=f"""bash {AIRFLOW_HOME}/dags/submit_pi_calc.sh """,
+        bash_command=f"""bash {AIRFLOW_HOME}/dags/repo/dags/submit_pi_calc.sh""",
         dag=dag
     )
 
