@@ -71,7 +71,7 @@ with DAG(
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
-            "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+        #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
         }
     )
 
@@ -86,6 +86,6 @@ with DAG(
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
-            "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+        #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
         }
     )
