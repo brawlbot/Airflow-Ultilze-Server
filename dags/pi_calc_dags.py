@@ -64,7 +64,7 @@ with DAG(
         task_id='pi_pyspark_client',
         bash_command="""spark-submit \
             --class org.apache.spark.examples.SparkPi \
-            --master yarn --deploy-mode cluster \
+            --master yarn --deploy-mode client \
             --driver-cores 2 \
             --driver-memory 1g \
             --num-executors 3 \
