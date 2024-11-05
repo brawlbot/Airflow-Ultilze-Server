@@ -34,6 +34,7 @@ with DAG(
 ) as dag:
 
 
+
     step_submit_pyspark = BashOperator(
         task_id='pi_pyspark_client',
         bash_command="""spark-submit \
@@ -47,8 +48,15 @@ with DAG(
             --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
         env={
+            "HADOOP_CLIENT_OPTS": "-Xmx2147483648 -Djava.net.preferIPv4Stack=true",
+            "HADOOP_CONF_DIR": "/etc/hadoop",
             "PYSPARK_PYTHON": "./environment/bin/python",
-        #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+            "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+            "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/hadoop/bin:/opt/hive/bin:/opt/spark/bin",
+            "PYTHONPATH": "/opt/spark/python/lib/py4j-0.10.7-src.zip:/opt/spark/python/lib/py4j-0.10.9-src.zip:/opt/spark/python/lib/py4j-0.10.9.3-src.zip:/opt/spark/python:$PYTHONPATH",
+            "PYTHONSTARTUP": "/opt/spark/python/pyspark/shell.py",
+            "SPARK_HOME": "/opt/spark",
+            "SPARK_CONF_DIR": "/etc/spark",
         }
     )
 
