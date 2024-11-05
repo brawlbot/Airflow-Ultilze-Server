@@ -46,7 +46,9 @@ with DAG(
             --executor-cores 2 \
             --executor-memory 1g \
             --archives /opt/conda/archives/spark.tar.gz#environment \
-            {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
+            /opt/airflow/dags/repo/scripts/pi-spark.py
+        """,
+        # {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py
         env={
             "HADOOP_CLIENT_OPTS": "-Xmx2147483648 -Djava.net.preferIPv4Stack=true",
             "HADOOP_CONF_DIR": "/etc/hadoop",
