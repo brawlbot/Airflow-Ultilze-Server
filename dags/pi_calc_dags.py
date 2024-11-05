@@ -73,26 +73,33 @@ with DAG(
             --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
         env={
+            "HADOOP_CLIENT_OPTS": "-Xmx2147483648 -Djava.net.preferIPv4Stack=true",
+            "HADOOP_CONF_DIR": "/etc/hadoop",
             "PYSPARK_PYTHON": "./environment/bin/python",
-        #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+            "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+            "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/hadoop/bin:/opt/hive/bin:/opt/spark/bin",
+            "PYTHONPATH": "/opt/spark/python/lib/py4j-0.10.7-src.zip:/opt/spark/python/lib/py4j-0.10.9-src.zip:/opt/spark/python/lib/py4j-0.10.9.3-src.zip:/opt/spark/python:$PYTHONPATH",
+            "PYTHONSTARTUP": "/opt/spark/python/pyspark/shell.py",
+            "SPARK_HOME": "/opt/spark",
+            "SPARK_CONF_DIR": "/etc/spark",
         }
     )
 
-    step_submit_pyspark_cluster = BashOperator(
-        task_id='pi_pyspark_cluster',
-        bash_command="""spark-submit \
-            spark-submit \
-            --class org.apache.spark.examples.SparkPi \
-            --master yarn --deploy-mode cluster \
-            --driver-cores 2 \
-            --driver-memory 1g \
-            --num-executors 3 \
-            --executor-cores 2 \
-            --executor-memory 1g \
-            --archives /opt/conda/archives/spark.tar.gz#environment \
-            {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
-        env={
-            "PYSPARK_PYTHON": "./environment/bin/python",
-        #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
-        }
-    )
+    # step_submit_pyspark_cluster = BashOperator(
+    #     task_id='pi_pyspark_cluster',
+    #     bash_command="""spark-submit \
+    #         spark-submit \
+    #         --class org.apache.spark.examples.SparkPi \
+    #         --master yarn --deploy-mode cluster \
+    #         --driver-cores 2 \
+    #         --driver-memory 1g \
+    #         --num-executors 3 \
+    #         --executor-cores 2 \
+    #         --executor-memory 1g \
+    #         --archives /opt/conda/archives/spark.tar.gz#environment \
+    #         {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
+    #     env={
+    #         "PYSPARK_PYTHON": "./environment/bin/python",
+    #     #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
+    #     }
+    # )
