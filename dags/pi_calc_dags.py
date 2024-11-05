@@ -62,9 +62,11 @@ with DAG(
 
     step_submit_pyspark = BashOperator(
         task_id='pi_pyspark_client',
-        bash_command="""spark-submit --master yarn --deploy-mode client \
+        bash_command="""spark-submit \
+            --master yarn --deploy-mode client \
             --driver-memory 4g --num-executors 6 \
-            --executor-cores 3 --executor-memory 4g --conf spark.driver.maxResultSize=3g \
+            --executor-cores 3 --executor-memory 4g \
+            --conf spark.driver.maxResultSize=3g \
             --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
         env={
@@ -75,9 +77,11 @@ with DAG(
 
     step_submit_pyspark_cluster = BashOperator(
         task_id='pi_pyspark_cluster',
-        bash_command="""spark-submit --master yarn --deploy-mode cluster \
+        bash_command="""spark-submit \
+            --master yarn --deploy-mode cluster \
             --driver-memory 4g --num-executors 6 \
-            --executor-cores 3 --executor-memory 4g --conf spark.driver.maxResultSize=3g \
+            --executor-cores 3 --executor-memory 4g \
+            --conf spark.driver.maxResultSize=3g \
             --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
         env={
