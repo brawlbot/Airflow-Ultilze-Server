@@ -24,7 +24,7 @@ default_args = {
 }
 
 with DAG(
-    'Bundling_env',
+    'bundling_env',
     default_args=default_args,
     description='Bundling environment',
     schedule_interval="25 15 * * *",
