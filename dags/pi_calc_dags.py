@@ -65,9 +65,8 @@ with DAG(
         bash_command="""spark-submit --master yarn --deploy-mode client \
             --driver-memory 4g --num-executors 6 \
             --executor-cores 3 --executor-memory 4g --conf spark.driver.maxResultSize=3g \
-            --archives hdfs://c0s/user/dp-ai-workspace-97ta9/archives/spark.tar.gz#environment \
+            --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
-
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
             "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
@@ -79,9 +78,8 @@ with DAG(
         bash_command="""spark-submit --master yarn --deploy-mode cluster \
             --driver-memory 4g --num-executors 6 \
             --executor-cores 3 --executor-memory 4g --conf spark.driver.maxResultSize=3g \
-            --archives hdfs://c0s/user/dp-ai-workspace-97ta9/archives/spark.tar.gz#environment \
+            --archives /opt/conda/archives/spark.tar.gz#environment \
             {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
-
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
             "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
