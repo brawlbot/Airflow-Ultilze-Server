@@ -68,7 +68,7 @@ with DAG(
             --executor-cores 3 --executor-memory 4g \
             --conf spark.driver.maxResultSize=3g \
             --archives /opt/conda/archives/spark.tar.gz#environment \
-            {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
+            {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
         #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
@@ -83,7 +83,7 @@ with DAG(
             --executor-cores 3 --executor-memory 4g \
             --conf spark.driver.maxResultSize=3g \
             --archives /opt/conda/archives/spark.tar.gz#environment \
-            {AIRFLOW_HOME}/dags/repo/dags/pi-spark.py""",
+            {AIRFLOW_HOME}/dags/repo/scripts/pi-spark.py""",
         env={
             "PYSPARK_PYTHON": "./environment/bin/python",
         #     "PYSPARK_DRIVER_PYTHON": "/opt/conda/envs/spark/bin/python",
