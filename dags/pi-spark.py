@@ -1,10 +1,12 @@
 from time import time
-import numpy as np
+import os
 from random import random
 from operator import add
+import numpy as np
 
 from pyspark.sql import SparkSession
 
+# os.environ['PYSPARK_PYTHON'] = "./environment/bin/python"
 spark = SparkSession.builder.appName('CalculatePi').getOrCreate()
 sc = spark.sparkContext
 
