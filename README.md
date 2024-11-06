@@ -47,9 +47,9 @@ run [pyspark_jdbc_check.ipynb](notebook/pyspark_jdbc_check.ipynb) to test if spa
 
 # 4. Run spark pi
 run [pi_calc_dags](dags/pi_calc_dags.py) to test if spark can run pi calculation with option:
+    - client mode (class org.apache.spark.examples.SparkPi with jar and python in the same node)
+    - cluster mode (class org.apache.spark.examples.SparkPi with jar and python in different nodes)
 
-    - client mode (jar and python in the same node)
-    - cluster mode (jar and python in different nodes)
 # 5. Bundling environment
 ## 5.1 Create environment
 ```bash
@@ -68,13 +68,30 @@ Valid starting       Expires              Service principal
         renew until 11/08/2024 03:07:15
 ```
 
+
+```sh
+jupyter kernelspec list
+jupyter kernelspec install /home/jovyan/custom_spark_kernel --user
+```
+
 ```bash
 hadoop dfs -ls hdfs://c0s/user/dp-ai-workspace-97ta9/archives/
 hadoop dfs -mkdir -p /user/dp-ai-workspace-97ta9/archives/
 hadoop dfs -put environment.tar.gz hdfs://c0s/user/dp-ai-workspace-97ta9/archives/environment.tar.gz
 ```
+
 ## 5.3 Run dag
+run [dag_bundling_env](dags/dag_bundling_env.py) to test if spark can import module from bundling environment
+    bundling environment (in cluster mode), note that do not set PYSPARK_DRIVER_PYTHON in the environment variable
 
-run [dag_bundling_env](dags/dag_bundling_env.py) to test if spark can run pi calculation with option:
 
-    - bundling environment (jar and python in the same node, but python is in a separated environment)
+```sh
+yarn logs -applicationId application_1730805578034_23329 > yarn.log
+```
+
+```log
+/hadoop/yarn/local/usercache/dp-ai-workspace-97ta9/appcache/application_1730805578034_23329/container_e1299_1730805578034_23329_01_000001/environment/lib/python3.8/site-packages/gspread/__init__.py
+----------------------------------------------------------------------------------------------------
+6.057 seconds elapsed for spark approach and n= 1000
+Pi is roughly 3.196000
+```
