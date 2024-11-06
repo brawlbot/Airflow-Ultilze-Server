@@ -63,7 +63,7 @@ with DAG(
     step_submit_pyspark_client = BashOperator(
         task_id='pi_pyspark_client',
         bash_command="""spark-submit \
-            --class org.apache.spark.examples.SparkPi \
+            --name PiCalc-client \
             --master yarn --deploy-mode client \
             --driver-cores 2 \
             --driver-memory 1g \
@@ -86,11 +86,11 @@ with DAG(
         }
     )
 
-    step_submit_pyspark_client = BashOperator(
-        task_id='pi_pyspark_client',
+    step_submit_pyspark_cluster = BashOperator(
+        task_id='pi_pyspark_cluster',
         bash_command="""spark-submit \
-            --class org.apache.spark.examples.SparkPi \
-            --master yarn --deploy-mode client \
+            --name PiCalc-cluster \
+            --master yarn --deploy-mode cluster \
             --driver-cores 2 \
             --driver-memory 1g \
             --num-executors 3 \
