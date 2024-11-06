@@ -46,7 +46,8 @@ with DAG(
             --executor-cores 2 \
             --executor-memory 1g \
             --archives hdfs://c0s/user/dp-ai-workspace-97ta9/archives/environment.tar.gz#environment \
-            /opt/airflow/dags/repo/scripts/pi-spark.py
+            /opt/airflow/dags/repo/scripts/verify_version.py
+                
         """,
 
         env={
