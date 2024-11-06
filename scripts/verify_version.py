@@ -7,11 +7,7 @@ import numpy as np
 from pyspark.sql import SparkSession
 
 os.environ['PYSPARK_PYTHON'] = "./environment/bin/python"
-spark = SparkSession.builder.appName('VerifyVersion').config(
-    "spark.archives",
-    "/home/jovyan/gspread.tar.gz#environment"
-    # "hdfs://c0s/user/dp-ai-workspace-97ta9/archives/gspread.tar.gz#environment"
-).getOrCreate()
+spark = SparkSession.builder.appName('VerifyVersion').getOrCreate()
 sc = spark.sparkContext
 
 
