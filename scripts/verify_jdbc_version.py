@@ -30,6 +30,9 @@ df = spark.read.jdbc(url=f"jdbc:postgresql://{DBHOST}:{DBPORT}/{DBNAME}",
                      table="public.tmp_random_data", properties={"user": DBUSER, "password": DBPASS})
 
 df_local = df.limit(10).toPandas()
-
+print("--- df_local ---")
+print("-" * 100)
 print(df_local)
+print("-" * 100)
 print(df_local.shape)
+print("-" * 100)
