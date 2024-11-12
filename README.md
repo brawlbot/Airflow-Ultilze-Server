@@ -99,7 +99,7 @@ Pi is roughly 3.196000
 
 
 # 6. Run spark with custom jar
-run [dag_spark_with_custom_jar](dags/dag_spark_with_custom_jar.py) to test if spark can run with custom jar
+run [dag_jars_add](dags/dag_jars_add.py) to test if spark can run with custom jar
 ```sh
 mkdir -p /home/jovyan/jars
 wget https://jdbc.postgresql.org/download/postgresql-42.7.4.jar -O /home/jovyan/jars/postgresql-42.7.4.jar
@@ -114,4 +114,30 @@ conda activate /opt/conda/envs/spark/
 pip3 install pydoop
 conda pack -o pydoop_env.tar.gz
 hadoop dfs -put pydoop_env.tar.gz hdfs://c0s/user/dp-ai-workspace-97ta9/archives/pydoop_env.tar.gz
+```
+## expected output
+```log
+24/11/12 10:34:45 INFO yarn.Client: Application report for application_1731398263149_2652 (state: RUNNING)
+24/11/12 10:34:46 INFO yarn.Client: Application report for application_1731398263149_2652 (state: RUNNING)
+24/11/12 10:34:47 INFO yarn.Client: Application report for application_1731398263149_2652 (state: RUNNING)
+24/11/12 10:34:48 INFO yarn.Client: Application report for application_1731398263149_2652 (state: RUNNING)
+```
+```sh
+yarn logs -applicationId application_1731398263149_2652 |less
+--- df_local ---
+----------------------------------------------------------------------------------------------------
+   id
+0  22
+1  23
+2  24
+3  25
+4  26
+5  88
+6  89
+7  90
+8  91
+9  92
+----------------------------------------------------------------------------------------------------
+(10, 1)
+----------------------------------------------------------------------------------------------------
 ```
