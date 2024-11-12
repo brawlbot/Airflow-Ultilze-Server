@@ -37,7 +37,7 @@ with DAG(
     custom = BashOperator(
         task_id='verify_jdbc_version',
         bash_command="""spark-submit \
-            --master yarn --deploy-mode client \
+            --master yarn --deploy-mode cluster \
             --driver-cores 2 \
             --driver-memory 1g \
             --num-executors 3 \
