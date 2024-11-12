@@ -47,8 +47,9 @@ run [pyspark_jdbc_check.ipynb](notebook/pyspark_jdbc_check.ipynb) to test if spa
 
 # 4. Run spark pi
 run [pi_calc_dags](dags/pi_calc_dags.py) to test if spark can run pi calculation with option:
-    - client mode (class org.apache.spark.examples.SparkPi with jar and python in the same node)
-    - cluster mode (class org.apache.spark.examples.SparkPi with jar and python in different nodes)
+
+    + client mode (class org.apache.spark.examples.SparkPi with jar and python in the same node)
+    + cluster mode (class org.apache.spark.examples.SparkPi with jar and python in different nodes)
 
 # 5. Bundling environment
 ## 5.1 Create environment
@@ -94,4 +95,23 @@ yarn logs -applicationId application_1730805578034_23329 > yarn.log
 ----------------------------------------------------------------------------------------------------
 6.057 seconds elapsed for spark approach and n= 1000
 Pi is roughly 3.196000
+```
+
+
+# 6. Run spark with custom jar
+run [dag_spark_with_custom_jar](dags/dag_spark_with_custom_jar.py) to test if spark can run with custom jar
+```sh
+mkdir -p /home/jovyan/jars
+wget https://jdbc.postgresql.org/download/postgresql-42.7.4.jar -O /home/jovyan/jars/postgresql-42.7.4.jar
+hadoop dfs -put postgresql-42.7.4.jar hdfs://c0s/user/dp-ai-workspace-97ta9/archives/postgresql-42.7.4.jar
+
+hadoop dfs -mkdir -p hdfs://c0s/user/dp-ai-workspace-97ta9/config
+hadoop dfs -put config/postgres.json hdfs://c0s/user/dp-ai-workspace-97ta9/config/postgres.json
+```
+
+```bash
+conda activate /opt/conda/envs/spark/
+pip3 install pydoop
+conda pack -o pydoop_env.tar.gz
+hadoop dfs -put pydoop_env.tar.gz hdfs://c0s/user/dp-ai-workspace-97ta9/archives/pydoop_env.tar.gz
 ```
